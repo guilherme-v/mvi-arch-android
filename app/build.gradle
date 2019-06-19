@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -24,10 +23,60 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // androidX
+    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.annotation:annotation:1.1.0"
+    implementation "androidx.legacy:legacy-support-v13:1.0.0"
+    implementation 'androidx.core:core-ktx:1.1.0-rc01'
+    implementation "androidx.legacy:legacy-support-v13:1.0.0"
+    implementation "com.google.android.material:material:1.1.0-alpha07"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.2.0-alpha01"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0-alpha01"
+    testImplementation "androidx.arch.core:core-testing:2.1.0-beta01"
+
+
+    def navigation_version = '1.0.0'
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation_version"
+
+    def constraint_layout_version = '1.1.3'
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "androidx.constraintlayout:constraintlayout-solver:$constraint_layout_version"
+
+    def rx_kotlin_version = '2.3.0'
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+
+    def android_scheduler_version = '2.1.0'
+    implementation "io.reactivex.rxjava2:rxandroid:$android_scheduler_version"
+
+    def koin_version = '2.0.0-GA'
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    def dagger_version = '2.22.1'
+    implementation "com.google.dagger:dagger:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+
+    def retrofit_version = '2.5.0'
+    implementation "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}"
+
+    def glideVersion = '4.0.0'
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    androidTestImplementation 'androidx.test:runner:1.3.0-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha01'
 }
