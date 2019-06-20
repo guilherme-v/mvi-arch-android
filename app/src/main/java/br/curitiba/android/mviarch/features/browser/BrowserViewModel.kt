@@ -1,7 +1,7 @@
 package br.curitiba.android.mviarch.features.browser
 
 import androidx.lifecycle.ViewModel
-import br.curitiba.android.mviarch.data.repositories.ProjectsRepository
+import br.curitiba.android.mviarch.data.source.ProjectsDataSource
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserAction
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserAction.*
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserIntent
@@ -17,7 +17,7 @@ import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class BrowserViewModel @Inject constructor(
-    private val projectsRepository: ProjectsRepository
+    private val projectsRepository: ProjectsDataSource
 ) : ViewModel() {
 
     private val intentsSubject: PublishSubject<BrowserIntent> = PublishSubject.create()

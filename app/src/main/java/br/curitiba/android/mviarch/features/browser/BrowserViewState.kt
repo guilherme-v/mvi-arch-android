@@ -1,6 +1,6 @@
 package br.curitiba.android.mviarch.features.browser
 
-import br.curitiba.android.mviarch.data.dto.Project
+import br.curitiba.android.mviarch.data.models.Project
 
 data class BrowserViewState(
     val isLoading: Boolean,

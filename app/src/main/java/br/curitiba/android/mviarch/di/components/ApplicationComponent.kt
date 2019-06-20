@@ -3,7 +3,7 @@ package br.curitiba.android.mviarch.di.components
 import android.app.Application
 import android.content.Context
 import br.curitiba.android.mviarch.MviApplication
-import br.curitiba.android.mviarch.di.modules.RepositoriesModule
+import br.curitiba.android.mviarch.di.modules.DataModule
 import br.curitiba.android.mviarch.di.modules.ViewModelModule
 import br.curitiba.android.mviarch.di.qualifiers.ApplicationContext
 import br.curitiba.android.mviarch.di.scopes.ApplicationScope
@@ -13,7 +13,7 @@ import dagger.Component
 @ApplicationScope
 @Component(modules = [
     ViewModelModule::class,
-    RepositoriesModule::class
+    DataModule::class
 ])
 interface ApplicationComponent {
 

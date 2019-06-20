@@ -1,6 +1,6 @@
 package br.curitiba.android.mviarch.features.browser.mvi
 
-import br.curitiba.android.mviarch.data.dto.Project
+import br.curitiba.android.mviarch.data.models.Project
 
 sealed class BrowserResult {
 

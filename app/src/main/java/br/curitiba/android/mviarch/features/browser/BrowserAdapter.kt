@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.curitiba.android.mviarch.R
-import br.curitiba.android.mviarch.data.dto.Project
+import br.curitiba.android.mviarch.data.models.Project
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 

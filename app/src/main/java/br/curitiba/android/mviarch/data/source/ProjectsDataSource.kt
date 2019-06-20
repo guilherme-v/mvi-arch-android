@@ -1,10 +1,10 @@
-package br.curitiba.android.mviarch.data.repositories
+package br.curitiba.android.mviarch.data.source
 
-import br.curitiba.android.mviarch.data.dto.Project
+import br.curitiba.android.mviarch.data.models.Project
 import io.reactivex.Completable
 import io.reactivex.Single
 
-interface ProjectsRepository {
+interface ProjectsDataSource {
 
     fun getProjects(): Single<List<Project>>
 
