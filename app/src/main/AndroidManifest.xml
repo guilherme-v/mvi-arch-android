@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="br.curitiba.android.mviarch">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
             android:name=".MviApplication"
             android:allowBackup="true"
