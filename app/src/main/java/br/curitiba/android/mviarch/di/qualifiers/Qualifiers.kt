@@ -13,3 +13,11 @@ annotation class NetworkProjectsDataSource
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class DatabaseProjectsDataSource
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class UIScheduler
+
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class IOScheduler

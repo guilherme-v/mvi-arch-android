@@ -3,6 +3,8 @@ package br.curitiba.android.mviarch.features.browser
 import androidx.lifecycle.ViewModel
 import br.curitiba.android.mviarch.data.ProjectsRepository
 import br.curitiba.android.mviarch.data.source.ProjectsDataSource
+import br.curitiba.android.mviarch.di.qualifiers.IOScheduler
+import br.curitiba.android.mviarch.di.qualifiers.UIScheduler
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserAction
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserAction.*
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserIntent
@@ -11,6 +13,7 @@ import br.curitiba.android.mviarch.features.browser.mvi.BrowserResult
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserResult.*
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +21,9 @@ import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class BrowserViewModel @Inject constructor(
-    private val projectsRepository: ProjectsRepository
+    private val projectsRepository: ProjectsRepository,
+    @IOScheduler val ioScheduler: Scheduler,
+    @UIScheduler val uiScheduler: Scheduler
 ) : ViewModel() {
 
     private val intentsSubject: PublishSubject<BrowserIntent> = PublishSubject.create()
@@ -45,8 +50,8 @@ class BrowserViewModel @Inject constructor(
                     .map { projectList -> LoadProjectsResult.Success(projectList) }
                     .cast(LoadProjectsResult::class.java)
                     .onErrorReturn(LoadProjectsResult::Failure)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioScheduler)
+                    .observeOn(uiScheduler)
                     .startWith(LoadProjectsResult.InFlight)
             }
         }
@@ -60,8 +65,8 @@ class BrowserViewModel @Inject constructor(
                     .andThen(Observable.just(BookmarkProjectResult.Success))
                     .cast(BookmarkProjectResult::class.java)
                     .onErrorReturn(BookmarkProjectResult::Failure)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioScheduler)
+                    .observeOn(uiScheduler)
                     .startWith(BookmarkProjectResult.InFlight)
             }
         }
@@ -75,8 +80,8 @@ class BrowserViewModel @Inject constructor(
                     .andThen(Observable.just(UnBookmarkProjectResult.Success))
                     .cast(UnBookmarkProjectResult::class.java)
                     .onErrorReturn(UnBookmarkProjectResult::Failure)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(ioScheduler)
+                    .observeOn(uiScheduler)
                     .startWith(UnBookmarkProjectResult.InFlight)
             }
         }
