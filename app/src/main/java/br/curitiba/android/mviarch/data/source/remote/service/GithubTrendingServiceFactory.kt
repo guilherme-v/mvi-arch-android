@@ -1,5 +1,7 @@
 package br.curitiba.android.mviarch.data.source.remote.service
 
+import com.facebook.stetho.Stetho
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,14 +13,14 @@ import java.util.concurrent.TimeUnit
 object GithubTrendingServiceFactory {
 
     fun makeGithubTrendingService(isDebug: Boolean): GithubTrendingService {
-        val okHttpClient = makeOkHttpClient(
-            makeLoggingInterceptor(isDebug)
-        )
+        val okHttpClient = makeOkHttpClient( makeLoggingInterceptor(isDebug) )
+
         return makeGithubTrendingService(okHttpClient, Gson())
     }
 
     private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addNetworkInterceptor(StethoInterceptor())
             .addInterceptor(httpLoggingInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)

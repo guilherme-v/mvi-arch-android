@@ -1,28 +1,16 @@
 package br.curitiba.android.mviarch.data
 
-import br.curitiba.android.mviarch.data.source.ProjectsDataSource
 import br.curitiba.android.mviarch.data.models.Project
 import io.reactivex.Completable
 import io.reactivex.Single
-import javax.inject.Inject
 
-class ProjectsRepository @Inject constructor(
-    private val remote: ProjectsDataSource
-) : ProjectsDataSource {
+interface ProjectsRepository {
 
-    override fun getProjects(): Single<List<Project>> {
-        return remote.getProjects()
-    }
+    fun getProjects(): Single<List<Project>>
 
-    override fun bookmarkProject(projectId: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    fun setProjectAsBookmarked(projectId: String): Completable =
+        throw UnsupportedOperationException("Operation isn't supported here...")
 
-    override fun unbookmarkProject(projectId: String): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getBookmarkedProjects(): Single<List<Project>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    fun setProjectAsNotBookmarked(projectId: String): Completable =
+        throw UnsupportedOperationException("Operation isn't supported here...")
 }

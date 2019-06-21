@@ -1,0 +1,17 @@
+CREATE TABLE project_entity(
+    id TEXT PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    star_count INTEGER AS Int NOT NULL,
+    date_created TEXT NOT NULL,
+    owner_name TEXT NOT NULL,
+    owner_avatar TEXT NOT NULL,
+    is_bookmarked INTEGER AS Boolean DEFAULT 0 NOT NULL
+);
+
+selectAll:
+SELECT * FROM project_entity;
+
+insert:
+INSERT OR REPLACE INTO project_entity(id, name, full_name, star_count, date_created, owner_name, owner_avatar, is_bookmarked)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);

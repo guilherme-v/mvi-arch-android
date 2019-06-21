@@ -3,6 +3,7 @@ package br.curitiba.android.mviarch.di.components
 import android.app.Application
 import android.content.Context
 import br.curitiba.android.mviarch.MviApplication
+import br.curitiba.android.mviarch.di.modules.ApplicationModule
 import br.curitiba.android.mviarch.di.modules.DataModule
 import br.curitiba.android.mviarch.di.modules.ViewModelModule
 import br.curitiba.android.mviarch.di.qualifiers.ApplicationContext
@@ -12,6 +13,7 @@ import dagger.Component
 
 @ApplicationScope
 @Component(modules = [
+    ApplicationModule::class,
     ViewModelModule::class,
     DataModule::class
 ])
@@ -22,10 +24,6 @@ interface ApplicationComponent {
 
         @BindsInstance
         fun application(application: Application): Builder
-
-        @BindsInstance
-        @ApplicationContext
-        fun applicationContext(context: Context): Builder
 
         fun build(): ApplicationComponent
     }

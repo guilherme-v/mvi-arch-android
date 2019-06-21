@@ -2,6 +2,10 @@ package br.curitiba.android.mviarch.data.source.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
+// Do not trust API
+// Allow receive null values here, but map it to Domain Not null val's with default values if needed
+// This why we do not need to worry about null checks in any other layer ... if ( value != null ) { ... }
+
 data class ProjectsResponseDTO(
     val items: List<ProjectDTO>? = null
 )

@@ -1,11 +1,15 @@
 package br.curitiba.android.mviarch.di.modules
 
 import br.curitiba.android.mviarch.BuildConfig
-import br.curitiba.android.mviarch.data.source.ProjectsDataSource
 import br.curitiba.android.mviarch.data.ProjectsRepository
+import br.curitiba.android.mviarch.data.ProjectsRepositoryImpl
+import br.curitiba.android.mviarch.data.source.ProjectsDataSource
+import br.curitiba.android.mviarch.data.source.local.LocalProjectsDataSource
 import br.curitiba.android.mviarch.data.source.remote.RemoteProjectsDataSource
 import br.curitiba.android.mviarch.data.source.remote.service.GithubTrendingService
 import br.curitiba.android.mviarch.data.source.remote.service.GithubTrendingServiceFactory
+import br.curitiba.android.mviarch.di.qualifiers.DatabaseProjectsDataSource
+import br.curitiba.android.mviarch.di.qualifiers.NetworkProjectsDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -17,10 +21,16 @@ class DataModule {
     interface BindsModule {
 
         @Binds
-        fun projectRemoteDataSource(remoteProjectsDataSource: RemoteProjectsDataSource): ProjectsDataSource
+        fun projectRepository(projectsRepository: ProjectsRepositoryImpl): ProjectsRepository
 
-//        @Binds
-//        fun projectRepository(projectsRepository: ProjectsRepository): ProjectsRepository
+        @Binds
+        @DatabaseProjectsDataSource
+        fun bindLocalProjectsDataSource(datasource: LocalProjectsDataSource): ProjectsDataSource
+
+        @Binds
+        @NetworkProjectsDataSource
+        fun bindRemoteeProjectsDataSource(datasource: RemoteProjectsDataSource): ProjectsDataSource
+
     }
 
     @Provides

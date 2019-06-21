@@ -1,6 +1,7 @@
 package br.curitiba.android.mviarch.features.browser
 
 import androidx.lifecycle.ViewModel
+import br.curitiba.android.mviarch.data.ProjectsRepository
 import br.curitiba.android.mviarch.data.source.ProjectsDataSource
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserAction
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserAction.*
@@ -17,7 +18,7 @@ import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class BrowserViewModel @Inject constructor(
-    private val projectsRepository: ProjectsDataSource
+    private val projectsRepository: ProjectsRepository
 ) : ViewModel() {
 
     private val intentsSubject: PublishSubject<BrowserIntent> = PublishSubject.create()
@@ -55,7 +56,7 @@ class BrowserViewModel @Inject constructor(
         ObservableTransformer<BookmarkProjectAction, BrowserResult> { actions ->
             actions.flatMap { action ->
                 projectsRepository
-                    .bookmarkProject(action.project.id!!)
+                    .setProjectAsBookmarked(action.project.id)
                     .andThen(Observable.just(BookmarkProjectResult.Success))
                     .cast(BookmarkProjectResult::class.java)
                     .onErrorReturn(BookmarkProjectResult::Failure)
@@ -70,7 +71,7 @@ class BrowserViewModel @Inject constructor(
         ObservableTransformer<UnBookmarkProjectAction, BrowserResult> { actions ->
             actions.flatMap { action ->
                 projectsRepository
-                    .unbookmarkProject(action.project.id!!)
+                    .setProjectAsNotBookmarked(action.project.id)
                     .andThen(Observable.just(UnBookmarkProjectResult.Success))
                     .cast(UnBookmarkProjectResult::class.java)
                     .onErrorReturn(UnBookmarkProjectResult::Failure)
