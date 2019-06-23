@@ -32,7 +32,6 @@ class ApplicationModule {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     val driver = AndroidSqliteDriver(db)
                     Database.Schema.create(driver)
-                    Log.d("EHHHH", " CRIOU")
                 }
 
                 override fun onUpgrade(db: SupportSQLiteDatabase?, oldVersion: Int, newVersion: Int) {

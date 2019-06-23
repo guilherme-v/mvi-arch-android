@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.curitiba.android.mviarch.MviApplication
 import br.curitiba.android.mviarch.R
+import br.curitiba.android.mviarch.di.HasInjectors
 import br.curitiba.android.mviarch.features.browser.mvi.BrowserIntent
 import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
 import io.reactivex.Observable
@@ -36,7 +37,7 @@ class BrowserFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity?.application as MviApplication).applicationComponent.fragmentComponent().inject(this)
+        (activity?.application as HasInjectors).fragmentInjector.inject(this)
     }
 
     private fun setupBrowseRecycler() {

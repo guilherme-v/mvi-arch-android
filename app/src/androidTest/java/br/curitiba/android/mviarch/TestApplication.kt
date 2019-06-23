@@ -2,13 +2,12 @@ package br.curitiba.android.mviarch
 
 import android.app.Application
 import br.curitiba.android.mviarch.di.HasInjectors
-import br.curitiba.android.mviarch.di.components.DaggerApplicationComponent
-import com.facebook.stetho.Stetho
+import br.curitiba.android.mviarch.di.components.DaggerTestApplicationComponent
 
-class MviApplication : Application(), HasInjectors {
+class TestApplication : Application(), HasInjectors {
 
     private val applicationComponent by lazy {
-        DaggerApplicationComponent.builder()
+        DaggerTestApplicationComponent.builder()
             .application(this)
             .build()
     }
@@ -20,8 +19,5 @@ class MviApplication : Application(), HasInjectors {
     override fun onCreate() {
         applicationComponent.injectApplication(this)
         super.onCreate()
-        if (BuildConfig.DEBUG) {
-            Stetho.initializeWithDefaults(this)
-        }
     }
 }
